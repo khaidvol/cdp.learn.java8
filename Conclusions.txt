@@ -1,0 +1,35 @@
+getDuplicates() execution with large (1000000 elements) data set
+Execution: 665 ms Java8Aggregator
+Execution: 460 ms Java8ParallelAggregator
+Execution: 1562 ms Java7Aggregator
+
+getDuplicates() execution with small (1000 elements) data set
+Execution: 2 ms Java8Aggregator
+Execution: 1 ms Java8ParallelAggregator
+Execution: 1 ms Java7Aggregator
+
+getMostFrequentWords() execution with large (1000000 elements) data set
+Execution: 929 ms Java8Aggregator
+Execution: 543 ms Java8ParallelAggregator
+Execution: 10721 ms Java7Aggregator
+
+getMostFrequentWords() execution with small (1000 elements) data set
+Execution: 1 ms Java8Aggregator
+Execution: 3 ms Java8ParallelAggregator
+Execution: 1 ms Java7Aggregator
+
+sum() execution with large (1000000 elements) data set
+Execution: 19 ms Java8Aggregator
+Execution: 17 ms Java8ParallelAggregator
+Execution: 16 ms Java7Aggregator
+Execution: 39 ms Java7ParallelAggregator
+
+sum() execution with small (1000 elements) data set
+Execution: 0 ms Java8Aggregator
+Execution: 0 ms Java8ParallelAggregator
+Execution: 0 ms Java7Aggregator
+Execution: 1 ms Java7ParallelAggregator
+
+
+Java 7 & Java 8 have almost the same performance with small data sets and simple method logic.
+Java 8 implementation (Streams & Parallel Streams) is more effective with larger datasets and complex method logic.
