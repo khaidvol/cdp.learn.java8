@@ -8,13 +8,12 @@ import javafx.util.Pair;
 
 public class Java7ParallelAggregator implements Aggregator {
 
-    static int numOfThreads = Runtime.getRuntime().availableProcessors();
+    private static final int NUMBER_OF_THREADS = Runtime.getRuntime().availableProcessors();
 
     @Override
     public int sum(List<Integer> numbers) {
-        ForkJoinPool forkJoinPool = new ForkJoinPool(numOfThreads);
-        SumFork sumFork = new SumFork(numbers, 0, numbers.size());
-        int sum = forkJoinPool.invoke(sumFork);
+        ForkJoinPool forkJoinPool = new ForkJoinPool(NUMBER_OF_THREADS);
+        int sum = forkJoinPool.invoke(new SumFork(numbers, 0, numbers.size()));
         return sum;
     }
 
@@ -28,8 +27,10 @@ public class Java7ParallelAggregator implements Aggregator {
         throw new UnsupportedOperationException();
     }
 
+
+
     class SumFork extends RecursiveTask<Integer> {
-        static final int THRESHOLD = 4;
+        private final int THRESHOLD = 250_000;
         private List<Integer> list;
         private int begin;
         private int end;
@@ -41,6 +42,7 @@ public class Java7ParallelAggregator implements Aggregator {
 
         }
 
+
         @Override
         protected Integer compute() {
             final int size = end - begin;
@@ -51,11 +53,11 @@ public class Java7ParallelAggregator implements Aggregator {
                 }
                 return sum;
             } else {
-                final int middle = begin + ((end - begin) / 2);
+                final int middle = ((end + begin) / 2);
                 SumFork sum1 = new SumFork(list, begin, middle);
                 sum1.fork();
                 SumFork sum2 = new SumFork(list, middle, end);
-                int sum = sum1.join() + sum2.compute();
+                int sum =  sum2.compute() + sum1.join();
                 return sum;
             }
         }

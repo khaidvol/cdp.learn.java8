@@ -20,7 +20,7 @@ public class Java7Aggregator implements Aggregator {
     @Override
     public List<Pair<String, Long>> getMostFrequentWords(List<String> words, long limit) {
 
-        // store frequency of words in sorted map - key:word, value:frequency
+        // store frequency of words in map - key: word, value: frequency
         Map<String, Long> tempMap = new TreeMap<>();
         for(String word: words) {
             Long frequencyCounter = tempMap.get(word);
