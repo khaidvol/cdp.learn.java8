@@ -114,7 +114,7 @@ public class JavaAggregatorPerformanceTest {
 
     private static void frequencyPerformance(Aggregator aggregator, List<String> words, long limit){
         long start = System.currentTimeMillis();
-        aggregator.getMostFrequentWords(words, limit);
+        System.out.println(aggregator.getMostFrequentWords(words, limit));
         long delta = System.currentTimeMillis() - start;
         System.out.println("Execution: " + delta + " ms " + aggregator.getClass().getSimpleName());
     }
@@ -144,8 +144,8 @@ public class JavaAggregatorPerformanceTest {
         for(int i = 0; i < amount; i++) {
             StringBuilder sb = new StringBuilder();
             int length = rm.nextInt(7);
-            for(int n = 0; n < length; n++){
-                int index = rm.nextInt(alphabet.length());
+            for(int n = 1; n < length; n++){
+                int index = rm.nextInt(alphabet.length()-1);
                 char randomChar = alphabet.charAt(index);
                 sb.append(randomChar);
             }
