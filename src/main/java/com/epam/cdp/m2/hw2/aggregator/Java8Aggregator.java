@@ -37,7 +37,7 @@ public class Java8Aggregator implements Aggregator {
                 .filter(w -> w.getValue() > 1)
                 .map(Entry::getKey)
                 .sorted()
-                .sorted((s1, s2) -> s1.length() - s2.length())
+                .sorted(Comparator.comparingInt(String::length))
                 .limit(limit)
                 .collect(Collectors.toList());
     }

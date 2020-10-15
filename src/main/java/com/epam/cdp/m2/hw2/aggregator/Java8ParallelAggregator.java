@@ -20,7 +20,7 @@ public class Java8ParallelAggregator implements Aggregator {
         return words.parallelStream()
                 .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
                 .entrySet()
-                .parallelStream()
+                .stream()
                 .sorted(Map.Entry.comparingByKey())
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .limit(limit)
@@ -34,11 +34,11 @@ public class Java8ParallelAggregator implements Aggregator {
                 .map(String::toUpperCase)
                 .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
                 .entrySet()
-                .parallelStream()
+                .stream()
                 .filter(w -> w.getValue() > 1)
                 .map(Map.Entry::getKey)
                 .sorted()
-                .sorted((s1, s2) -> s1.length() - s2.length())
+                .sorted(Comparator.comparingInt(String::length))
                 .limit(limit)
                 .collect(Collectors.toList());
     }

@@ -16,8 +16,8 @@ public class JavaAggregatorPerformanceTest {
 
     private static final int SMALL_DATA_SET_AMOUNT = 1_000;
     private static final int LARGE_DATA_SET_AMOUNT = 1_000_000;
-    private static final long LIMIT_SMALL_LIST = 10;
-    private static final long LIMIT_LARGE_LIST = 1_000;
+    private static final long LIMIT_SMALL_LIST = 100;
+    private static final long LIMIT_LARGE_LIST = 10_000;
 
     private static Aggregator java7Aggregator;
     private static Aggregator java7ParallelAggregator;
@@ -68,7 +68,7 @@ public class JavaAggregatorPerformanceTest {
         frequencyPerformance(java8Aggregator, wordsSmallList, LIMIT_SMALL_LIST);
         frequencyPerformance(java8ParallelAggregator, wordsSmallList, LIMIT_SMALL_LIST);
         frequencyPerformance(java7Aggregator, wordsSmallList, LIMIT_SMALL_LIST);
-//        frequencyPerformance(java7ParallelAggregator, wordsSmallList, smallListLimit);
+        frequencyPerformance(java7ParallelAggregator, wordsSmallList, LIMIT_SMALL_LIST);
 
     }
 
@@ -78,7 +78,7 @@ public class JavaAggregatorPerformanceTest {
         frequencyPerformance(java8Aggregator, wordsLargeList, LIMIT_LARGE_LIST);
         frequencyPerformance(java8ParallelAggregator, wordsLargeList, LIMIT_LARGE_LIST);
         frequencyPerformance(java7Aggregator, wordsLargeList, LIMIT_LARGE_LIST);
-//        frequencyPerformance(java7ParallelAggregator, wordsLargeList, largeListLimit);
+        frequencyPerformance(java7ParallelAggregator, wordsLargeList, LIMIT_LARGE_LIST);
 
     }
 
@@ -88,7 +88,7 @@ public class JavaAggregatorPerformanceTest {
         duplicatesPerformance(java8Aggregator, wordsSmallList, LIMIT_SMALL_LIST);
         duplicatesPerformance(java8ParallelAggregator, wordsSmallList, LIMIT_SMALL_LIST);
         duplicatesPerformance(java7Aggregator, wordsSmallList, LIMIT_SMALL_LIST);
-//        duplicatesPerformance(java7ParallelAggregator, wordsSmallList, smallListLimit);
+        duplicatesPerformance(java7ParallelAggregator, wordsSmallList, LIMIT_SMALL_LIST);
 
     }
 
@@ -98,7 +98,7 @@ public class JavaAggregatorPerformanceTest {
         duplicatesPerformance(java8Aggregator, wordsLargeList, LIMIT_LARGE_LIST);
         duplicatesPerformance(java8ParallelAggregator, wordsLargeList, LIMIT_LARGE_LIST);
         duplicatesPerformance(java7Aggregator, wordsLargeList, LIMIT_LARGE_LIST);
-//        duplicatesPerformance(java7ParallelAggregator, wordsLargeList, largeListLimit);
+        duplicatesPerformance(java7ParallelAggregator, wordsLargeList, LIMIT_LARGE_LIST);
 
     }
 
@@ -114,7 +114,7 @@ public class JavaAggregatorPerformanceTest {
 
     private static void frequencyPerformance(Aggregator aggregator, List<String> words, long limit){
         long start = System.currentTimeMillis();
-        System.out.println(aggregator.getMostFrequentWords(words, limit));
+        aggregator.getMostFrequentWords(words, limit);
         long delta = System.currentTimeMillis() - start;
         System.out.println("Execution: " + delta + " ms " + aggregator.getClass().getSimpleName());
     }
@@ -143,9 +143,9 @@ public class JavaAggregatorPerformanceTest {
         Random rm = new Random();
         for(int i = 0; i < amount; i++) {
             StringBuilder sb = new StringBuilder();
-            int length = rm.nextInt(7);
-            for(int n = 1; n < length; n++){
-                int index = rm.nextInt(alphabet.length()-1);
+            int lengthOfBuiltString = rm.nextInt(7);
+            for(int n = 0; n < lengthOfBuiltString; n++){
+                int index = rm.nextInt(alphabet.length());
                 char randomChar = alphabet.charAt(index);
                 sb.append(randomChar);
             }

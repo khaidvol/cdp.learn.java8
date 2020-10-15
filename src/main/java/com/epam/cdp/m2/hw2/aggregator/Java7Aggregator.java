@@ -5,8 +5,6 @@ import java.util.Map.Entry;
 
 import javafx.util.Pair;
 
-import javax.print.attribute.HashAttributeSet;
-
 public class Java7Aggregator implements Aggregator {
 
     @Override
@@ -22,21 +20,17 @@ public class Java7Aggregator implements Aggregator {
     @Override
     public List<Pair<String, Long>> getMostFrequentWords(List<String> words, long limit) {
 
-        // store frequency of words in map - key: word, value: frequency
         Map<String, Long> tempMap = new HashMap<>();
         for(String word: words) {
             Long frequencyCounter = tempMap.get(word);
             tempMap.put(word, frequencyCounter == null ? 1 : frequencyCounter + 1);
         }
 
-        List<Pair<String, Long>> frequencyList = new ArrayList<>();
-        List<Entry<String, Long>> tempList = new ArrayList<>();
-
-        tempList.addAll(tempMap.entrySet());
-
+        List<Entry<String, Long>> tempList = new ArrayList<>(tempMap.entrySet());
         tempList.sort(Entry.comparingByKey());
         tempList.sort(Entry.comparingByValue(Comparator.reverseOrder()));
 
+        List<Pair<String, Long>> frequencyList = new ArrayList<>();
         for(Entry <String, Long> tempEntry: tempList) {
             frequencyList.add(new Pair<>(tempEntry.getKey(), tempEntry.getValue()));
         }
@@ -65,10 +59,10 @@ public class Java7Aggregator implements Aggregator {
         }
 
         Collections.sort(duplicatesList);
-        Collections.sort(duplicatesList, new Comparator<String>() {
+        duplicatesList.sort(new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
-                return o1.length()- o2.length();
+                return o1.length() - o2.length();
             }
         });
 
