@@ -8,37 +8,36 @@ import javafx.util.Pair;
 
 public class Java8Aggregator implements Aggregator {
 
-    @Override
-    public int sum(List<Integer> numbers) {
-        return numbers.stream()
-                .reduce(0, Integer::sum);
-    }
+  @Override
+  public int sum(List<Integer> numbers) {
+    return numbers.stream().reduce(0, Integer::sum);
+  }
 
-    @Override
-    public List<Pair<String, Long>> getMostFrequentWords(List<String> words, long limit) {
-        return words.stream()
-                .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .sorted(Entry.comparingByKey())
-                .sorted(Entry.comparingByValue(Comparator.reverseOrder()))
-                .limit(limit)
-                .map(w -> new Pair<>(w.getKey(), w.getValue()))
-                .collect(Collectors.toList());
-    }
+  @Override
+  public List<Pair<String, Long>> getMostFrequentWords(List<String> words, long limit) {
+    return words.stream()
+        .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
+        .entrySet()
+        .stream()
+        .sorted(Entry.comparingByKey())
+        .sorted(Entry.comparingByValue(Comparator.reverseOrder()))
+        .limit(limit)
+        .map(w -> new Pair<>(w.getKey(), w.getValue()))
+        .collect(Collectors.toList());
+  }
 
-    @Override
-    public List<String> getDuplicates(List<String> words, long limit) {
-        return words.stream()
-                .map(String::toUpperCase)
-                .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .filter(w -> w.getValue() > 1)
-                .map(Entry::getKey)
-                .sorted()
-                .sorted(Comparator.comparingInt(String::length))
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
+  @Override
+  public List<String> getDuplicates(List<String> words, long limit) {
+    return words.stream()
+        .map(String::toUpperCase)
+        .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
+        .entrySet()
+        .stream()
+        .filter(w -> w.getValue() > 1)
+        .map(Entry::getKey)
+        .sorted()
+        .sorted(Comparator.comparingInt(String::length))
+        .limit(limit)
+        .collect(Collectors.toList());
+  }
 }

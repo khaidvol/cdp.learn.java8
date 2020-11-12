@@ -18,21 +18,17 @@ import com.epam.cdp.m2.hw2.aggregator.sum.impl.Java8ParallelAggregatorSumTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        Java7AggregatorFrequencyTest.class,
-        Java7AggregatorSumTest.class,
-        Java7AggregatorDuplicatesTest.class,
-
-        Java8AggregatorFrequencyTest.class,
-        Java8AggregatorSumTest.class,
-        Java8AggregatorDuplicatesTest.class,
-
-        Java7ParallelAggregatorFrequencyTest.class,
-        Java7ParallelAggregatorSumTest.class,
-        Java7ParallelAggregatorDuplicatesTest.class,
-
-        Java8ParallelAggregatorFrequencyTest.class,
-        Java8ParallelAggregatorSumTest.class,
-        Java8ParallelAggregatorDuplicatesTest.class,
+  Java7AggregatorFrequencyTest.class,
+  Java7AggregatorSumTest.class,
+  Java7AggregatorDuplicatesTest.class,
+  Java8AggregatorFrequencyTest.class,
+  Java8AggregatorSumTest.class,
+  Java8AggregatorDuplicatesTest.class,
+  Java7ParallelAggregatorFrequencyTest.class,
+  Java7ParallelAggregatorSumTest.class,
+  Java7ParallelAggregatorDuplicatesTest.class,
+  Java8ParallelAggregatorFrequencyTest.class,
+  Java8ParallelAggregatorSumTest.class,
+  Java8ParallelAggregatorDuplicatesTest.class,
 })
-public class TestAll {
-}
+public class TestAll {}

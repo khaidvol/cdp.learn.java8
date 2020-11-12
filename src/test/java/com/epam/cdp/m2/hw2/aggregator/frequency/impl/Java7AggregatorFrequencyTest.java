@@ -9,8 +9,7 @@ import com.epam.cdp.m2.hw2.aggregator.frequency.JavaAggregatorFrequencyTest;
 @RunWith(Parameterized.class)
 public class Java7AggregatorFrequencyTest extends JavaAggregatorFrequencyTest {
 
-    public Java7AggregatorFrequencyTest() {
-        super(new Java7Aggregator());
-    }
-
+  public Java7AggregatorFrequencyTest() {
+    super(new Java7Aggregator());
+  }
 }

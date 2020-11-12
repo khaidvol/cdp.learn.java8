@@ -16,35 +16,41 @@ import javafx.util.Pair;
 
 public abstract class JavaAggregatorFrequencyTest {
 
-    @Parameterized.Parameter(0)
-    public long limit;
+  @Parameterized.Parameter(0)
+  public long limit;
 
-    @Parameterized.Parameter(1)
-    public List<String> words;
+  @Parameterized.Parameter(1)
+  public List<String> words;
 
-    @Parameterized.Parameter(2)
-    public List<Pair<String, Long>> expected;
+  @Parameterized.Parameter(2)
+  public List<Pair<String, Long>> expected;
 
-    private Aggregator aggregator;
+  private Aggregator aggregator;
 
-    public JavaAggregatorFrequencyTest(Aggregator aggregator) {
-        this.aggregator = aggregator;
-    }
+  public JavaAggregatorFrequencyTest(Aggregator aggregator) {
+    this.aggregator = aggregator;
+  }
 
-    @Parameterized.Parameters
-    public static List<Object[]> data() {
-        List<Object[]> data = new ArrayList<>();
-        data.add(new Object[]{2, asList("f", "c", "b", "b", "b", "c"), asList(new Pair<>("b", 3L), new Pair<>("c", 2L))});
-        data.add(new Object[]{2, asList("f", "f"), asList(new Pair<>("f", 2L))});
-        data.add(new Object[]{2, asList("f"), asList(new Pair<>("f", 1L))});
-        data.add(new Object[]{2, asList("a", "b", "b", "a"), asList(new Pair<>("a", 2L), new Pair<>("b", 2L))});
-        data.add(new Object[]{2, Collections.emptyList(), Collections.emptyList()});
-        return data;
-    }
+  @Parameterized.Parameters
+  public static List<Object[]> data() {
+    List<Object[]> data = new ArrayList<>();
+    data.add(
+        new Object[] {
+          2, asList("f", "c", "b", "b", "b", "c"), asList(new Pair<>("b", 3L), new Pair<>("c", 2L))
+        });
+    data.add(new Object[] {2, asList("f", "f"), asList(new Pair<>("f", 2L))});
+    data.add(new Object[] {2, asList("f"), asList(new Pair<>("f", 1L))});
+    data.add(
+        new Object[] {
+          2, asList("a", "b", "b", "a"), asList(new Pair<>("a", 2L), new Pair<>("b", 2L))
+        });
+    data.add(new Object[] {2, Collections.emptyList(), Collections.emptyList()});
+    return data;
+  }
 
-    @Test
-    public void test() {
-        List<Pair<String, Long>> actual = aggregator.getMostFrequentWords(words, limit);
-        assertEquals(expected, actual);
-    }
+  @Test
+  public void test() {
+    List<Pair<String, Long>> actual = aggregator.getMostFrequentWords(words, limit);
+    assertEquals(expected, actual);
+  }
 }

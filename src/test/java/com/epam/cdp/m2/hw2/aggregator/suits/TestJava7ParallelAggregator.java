@@ -9,9 +9,8 @@ import com.epam.cdp.m2.hw2.aggregator.sum.impl.Java7ParallelAggregatorSumTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        Java7ParallelAggregatorFrequencyTest.class,
-        Java7ParallelAggregatorSumTest.class,
-        Java7ParallelAggregatorDuplicatesTest.class,
+  Java7ParallelAggregatorFrequencyTest.class,
+  Java7ParallelAggregatorSumTest.class,
+  Java7ParallelAggregatorDuplicatesTest.class,
 })
-public class TestJava7ParallelAggregator {
-}
+public class TestJava7ParallelAggregator {}
